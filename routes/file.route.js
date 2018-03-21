@@ -2,6 +2,6 @@
 const router = require('express-promise-router')();
 const filesCtrl = require('../controllers/file.controller');
 
-router.get('/files/price', filesCtrl.getPriceFile);
+router.get('/price', filesCtrl.getPriceFile);
 
 module.exports = router;

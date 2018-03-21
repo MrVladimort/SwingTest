@@ -9,8 +9,7 @@ module.exports.createOrder = async (req, res, next) => {
         throw new HttpError(422, JSON.stringify(errors.mapped()));
     }
 
-    logger.info(req.body);
-    const order = await orderService.composeOrder(req.body);
+    const order = orderService.composeOrder(req.body);
     await orderService.createOrder(order);
 
     res.json(order);
