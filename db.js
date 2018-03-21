@@ -4,6 +4,8 @@ mongoose.Promise = global.Promise;
 
 mongoose.set('debug', true);
 
-mongoose.connect('mongodb://' + serverConfig.dbURL);
+console.log(serverConfig);
+
+mongoose.connect('mongodb://' + serverConfig.dbHost + ':' + serverConfig.dbPort + '/' + serverConfig.dbCollection);
 
 module.exports = mongoose;

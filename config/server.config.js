@@ -1,4 +1,6 @@
 module.exports = {
-    port: 3000,
-    dbURL: "localhost:27017/swingtest"
+    port: process.env.PORT,
+    dbHost: process.env.DB_HOST,
+    dbCollection: process.env.DB_COLLECTION,
+    dbPort: process.env.DB_PORT
 };
