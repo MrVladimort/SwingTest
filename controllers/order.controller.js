@@ -10,9 +10,10 @@ module.exports.createOrder = async (req, res, next) => {
     }
 
     logger.info(req.body);
-    orderService.c
+    const order = await orderService.composeOrder(req.body);
+    // await orderService.createOrder(order);
 
-    res.json('ok');
+    res.json(order);
 };
 
 module.exports.getOrders = async (req, res, next) => {
@@ -20,4 +21,8 @@ module.exports.getOrders = async (req, res, next) => {
     if (!errors.isEmpty()) {
         throw new HttpError(422, JSON.stringify(errors.mapped()));
     }
+
+    const orders = await orderService.gerOrders();
+
+    res.json(orders)
 };
