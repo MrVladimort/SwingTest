@@ -1,8 +1,9 @@
 const _ = require('lodash');
 const uuid = require('uuid/v1');
+const orderModel = require('../models/order.model');
 
 const calcPackagePrice = (weight) => {
-    if (weight < 400) return 0.01 * weight;
+    if (weight <= 400) return 0.01 * weight;
     else return 2 + 0.005 * weight;
 };
 
@@ -44,10 +45,6 @@ module.exports.composeOrder = (orderArray) => {
     return order;
 };
 
-module.exports.createOrder = async () => {
+module.exports.createOrder = async (orderData) => await orderModel.create(orderData);
 
-};
-
-module.exports.gerOrders = async () => {
-
-};
+module.exports.gerOrders = async () => await orderModel.find();

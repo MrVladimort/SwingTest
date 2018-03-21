@@ -11,7 +11,7 @@ module.exports.createOrder = async (req, res, next) => {
 
     logger.info(req.body);
     const order = await orderService.composeOrder(req.body);
-    // await orderService.createOrder(order);
+    await orderService.createOrder(order);
 
     res.json(order);
 };
