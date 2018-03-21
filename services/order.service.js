@@ -8,34 +8,29 @@ const calcPackagePrice = (weight) => {
 };
 
 module.exports.composeOrder = (orderArray) => {
-    let sortedArray = _.sortBy(orderArray, order => order.weight);
-    let order = {
+    const sortedArray = _.sortBy(orderArray, order => order.weight);
+    const order = {
         price: 0.0,
         trucks: []
     };
 
     while (!_.isEmpty(sortedArray)) {
-        let truckWeight = 0, popIndex = [];
+        let truckWeight = 0;
+
+        const popIndex = [];
         const truck = {
             truckID: uuid(),
             load: []
         };
 
-        if (sortedArray.length > 1) {
-            for (let i = 0; i < sortedArray.length; i++) {
-                const load = sortedArray[i];
-                if (truckWeight + load.weight < 1000) {
-                    truckWeight += load.weight;
-                    order.price += calcPackagePrice(load.weight);
-                    truck.load.push(load);
-                    popIndex.push(i);
-                }
+        for (let i = 0; i < sortedArray.length; i++) {
+            const load = sortedArray[i];
+            if (truckWeight + load.weight < 1000) {
+                truckWeight += load.weight;
+                order.price += calcPackagePrice(load.weight);
+                truck.load.push(load);
+                popIndex.push(i);
             }
-        } else {
-            const load = sortedArray[0];
-            order.price += calcPackagePrice(load.weight);
-            truck.load.push(load);
-            popIndex.push(0);
         }
 
         order.trucks.push(truck);
